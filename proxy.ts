@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server"
-import jwt, { JwtPayload } from "jsonwebtoken"
+import { NextRequest, NextResponse } from "next/server";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const AUTH_ROUTES =["/login", "/register"]
 const PUBLIC_ROUTES=["/", "/gears","/login", "/register"]

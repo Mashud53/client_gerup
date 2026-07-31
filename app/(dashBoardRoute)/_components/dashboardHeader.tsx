@@ -20,10 +20,10 @@ export function DashboardHeader({ user }: NavbarProps) {
       <div className="flex items-center gap-2">
         <div className="md:hidden">
           <Sheet>
-            <SheetTrigger>
-              <Button size="icon" variant="ghost">
+            <SheetTrigger className="inline-flex h-9 w-9 items-center justify-center rounded-md hover:bg-accent">
+              
                 <Menu className="h-5 w-5" />
-              </Button>
+              
             </SheetTrigger>
 
             <SheetContent
