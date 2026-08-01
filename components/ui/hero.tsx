@@ -43,13 +43,13 @@ export function Hero() {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                    <Link href="/browse">
+                    <Link href="/gears">
                         <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8">
                             Browse Gear
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Button>
                     </Link>
-                    <Link href="/how-it-works">
+                    <Link href="/">
                         <Button
                             size="lg"
                             variant="outline"
