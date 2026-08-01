@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import jwt from "jsonwebtoken"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -56,16 +57,27 @@ export type NavbarProps = {
 
 export function Navbar({ user }: NavbarProps) {
   const router = useRouter()
-  // console.log(user);
+  
+   
 
-  const { name, email } = user?.data ?? {};
+  const { name, email, role } = user?.data ?? {};
   const handleUserAction = async (action: string) => {
     if (action === 'dashboard') {
-      router.push('/dashboard')
+      if(role ==="USER"){
+        router.push('/dashboard')
+      }
+      else if(role ==="ADMIN"){
+        router.push('/admin-dashboard')
+      }
+      else if(role ==="PROVIDER"){
+        router.push('/provider-dashboard')
+      }
+      
     } else if (action === 'logout') {
       await logout()
       toast.success("User Logged Out Successfull!")
-      router.push("/")
+      router.replace("/")
+      router.refresh()
       
     }
   }
@@ -111,16 +123,7 @@ export function Navbar({ user }: NavbarProps) {
 
             <ChevronDown className="h-4 w-4 opacity-50" />
           </DropdownMenuTrigger>
-          {/* <DropdownMenuTrigger >
-            <Button variant="ghost" className="flex items-center gap-2 h-10 px-3">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-                <AvatarFallback>U</AvatarFallback>
-              </Avatar>
-              <span className="hidden sm:inline text-sm font-medium">User</span>
-              <ChevronDown className="h-4 w-4 opacity-50" />
-            </Button>
-          </DropdownMenuTrigger> */}
+         
           <DropdownMenuContent align="end" className="w-56">
             <div className="px-2 py-1.5 text-sm">
               <p className="font-medium">{name}</p>
@@ -133,7 +136,7 @@ export function Navbar({ user }: NavbarProps) {
               {navItems.map((item) => (
                 <DropdownMenuItem
                   key={item.href}
-                  // onClick={() => handleNavClick(item.href)}
+                 
                   className="cursor-pointer"
                 >
                   {item.label}

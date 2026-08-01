@@ -18,11 +18,11 @@ export const getMe = async () => {
         headers: {
             Authorization: `${accessToken}`
         },
-        // cache: "force-cache",
-        // next: {
-        //     revalidate: 60 * 60 * 24,
-        //     tags: ["my-profile"]
-        // }
+        cache: "force-cache",
+        next: {
+            revalidate: 60 * 60 * 24,
+            tags: ["my-profile"]
+        }
     });
 
     const result = res.json()
