@@ -46,12 +46,12 @@ const adminNavItems = [
     },
     {
         title: "Gears",
-        href: "/dashboard/gears",
+        href: "/admin-dashboard/gears",
         icon: Backpack,
     },
     {
         title: "Users",
-        href: "/dashboard/users",
+        href: "/admin-dashboard/allUsers",
         icon: Users,
     },
 ]

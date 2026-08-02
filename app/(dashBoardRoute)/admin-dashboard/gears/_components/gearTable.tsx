@@ -1,0 +1,104 @@
+"use client";
+
+import { useState } from "react";
+import { Pencil } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table";
+
+
+import GearForm from "./gearForm";
+
+export interface Gear {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    category: string;
+    brand: string;
+    available: boolean;
+    stock: number;
+}
+
+interface Props {
+    gears: Gear[];
+}
+
+const GearTable = ({ gears }: Props) => {
+    const [selectedGear, setSelectedGear] = useState<Gear | null>(null);
+
+    return (
+        <>
+            <div className="rounded-lg border">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Description</TableHead>
+                            <TableHead>Price</TableHead>
+                            <TableHead>Category</TableHead>
+                            <TableHead>Brand</TableHead>
+                            <TableHead>Available</TableHead>
+                            <TableHead>Stock</TableHead>
+                            <TableHead className="text-right">
+                                Action
+                            </TableHead>
+                        </TableRow>
+                    </TableHeader>
+
+                    <TableBody>
+                        {gears.map((gear) => (
+                            <TableRow key={gear.id}>
+                                <TableCell>{gear.name}</TableCell>
+
+                                <TableCell className="max-w-xs truncate">
+                                    {gear.description}
+                                </TableCell>
+
+                                <TableCell>${gear.price}</TableCell>
+
+                                <TableCell>{gear.category}</TableCell>
+
+                                <TableCell>{gear.brand}</TableCell>
+
+                                <TableCell>
+                                    {gear.available ? "Yes" : "No"}
+                                </TableCell>
+
+                                <TableCell>{gear.stock}</TableCell>
+
+                                <TableCell className="text-right">
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() => setSelectedGear(gear)}
+                                    >
+                                        <Pencil className="h-4 w-4" />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
+
+            <GearForm
+                key={selectedGear?.id}
+                gear={selectedGear}
+                open={!!selectedGear}
+                onOpenChange={(open) => {
+                    if (!open) setSelectedGear(null);
+                }}
+            />
+        </>
+    );
+};
+
+export default GearTable;

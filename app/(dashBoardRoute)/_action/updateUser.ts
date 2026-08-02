@@ -1,6 +1,6 @@
 "use server"
 
-import { revalidatePath } from "next/cache";
+
 import { cookies } from "next/headers";
 
 type Status = "ACTIVE" | "SUSPEND";
@@ -26,10 +26,8 @@ export const updateStatus = async (id: string, status: Status) => {
     })
 
     const result = await res.json()
-    if (result.success){
-        // revalidatePath("/dashboard/users");
-    }
-    // console.log(result,"result ====================");
+    
+    
     return result
 
 }
