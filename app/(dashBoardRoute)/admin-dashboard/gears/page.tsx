@@ -7,7 +7,7 @@ const AllGears = async () => {
     const gears = data.data.result
     console.log(gears);
     return (
-        <div>
+        <div className='overflow-x-scroll'>
             <GearTable gears={gears}/>
             
         </div>

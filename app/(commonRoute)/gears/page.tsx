@@ -11,11 +11,11 @@ export interface GearProps {
     available: boolean
     
 }
-const CarsPage = async () => {
+const GearsPage = async () => {
     const response = await fetch(`${process.env.BACKEND_API_URL}/api/gear`);
     const data = await response.json();
     const gears = data.data.result
-    console.log(gears);
+    // console.log(gears);
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             
@@ -30,4 +30,4 @@ const CarsPage = async () => {
     );
 };
 
-export default CarsPage;
+export default GearsPage;

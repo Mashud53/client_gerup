@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,10 @@ import {
 
 
 import GearForm from "./gearForm";
+import { deleteGear } from "../_action/updateGear";
+import { useRouter } from "next/navigation";
+import { Toast } from "@base-ui/react";
+import { toast } from "sonner";
 
 export interface Gear {
     id: string;
@@ -33,7 +37,17 @@ interface Props {
 
 const GearTable = ({ gears }: Props) => {
     const [selectedGear, setSelectedGear] = useState<Gear | null>(null);
+    const router = useRouter() 
+    const handleDelete = async (id: string) => {
+        const result = await deleteGear(id)
+        console.log(result,"Result =================");
+        if(result.success){
+            toast.success("Gear delete successfull!")
+            router.refresh()
+        }
+        
 
+    }
     return (
         <>
             <div className="rounded-lg border">
@@ -48,7 +62,10 @@ const GearTable = ({ gears }: Props) => {
                             <TableHead>Available</TableHead>
                             <TableHead>Stock</TableHead>
                             <TableHead className="text-right">
-                                Action
+                                Upadate
+                            </TableHead>
+                            <TableHead className="text-right">
+                                Delete
                             </TableHead>
                         </TableRow>
                     </TableHeader>
@@ -81,6 +98,16 @@ const GearTable = ({ gears }: Props) => {
                                         onClick={() => setSelectedGear(gear)}
                                     >
                                         <Pencil className="h-4 w-4" />
+                                    </Button>
+                                </TableCell>
+                                <TableCell className="text-right">
+                                    <Button
+                                        size="icon"
+                                        variant="outline"
+                                        onClick={() => handleDelete(gear.id)}
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+
                                     </Button>
                                 </TableCell>
                             </TableRow>

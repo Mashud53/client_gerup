@@ -21,7 +21,7 @@ export default async function PublicLayout({
             <div className="flex flex-1 flex-col">
                 <DashboardHeader user={user} />
 
-                <main className="flex-1 p-6">
+                <main className="flex-1 p-6 overflow-x-scroll">
                     {children}
                 </main>
             </div>
