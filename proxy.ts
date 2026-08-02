@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest) {
 
     const decodedToken = accessToken ? jwt.decode(accessToken) as JwtPayload : null;
     // const decodedToken = accessToken ? jwtUtils.verifiedToken(accessToken, process.env.JWT_ACCESS_SECRET as string) : null;
-    console.log(decodedToken, "decodec=============");
+    // console.log(decodedToken, "decodec=============");
     let userRole = null;
     if (!decodedToken) {
         cookieStore.delete("accessToken");

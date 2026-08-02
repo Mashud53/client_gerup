@@ -51,9 +51,7 @@ const UserTable = ({
 
     }
 
-    // const onStatusChange = (id: string) => {
-    //     console.log(id);
-    // }
+   
     const onStatusChange = async (
         id: string,
         status: "ACTIVE" | "SUSPEND"
