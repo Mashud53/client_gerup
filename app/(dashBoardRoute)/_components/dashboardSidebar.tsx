@@ -9,6 +9,8 @@ import {
     Users,
     LogOut,
     Home,
+    Handshake,
+    ClipboardPlus
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -41,14 +43,25 @@ const adminNavItems = [
     },
     {
         title: "Payment",
-        href: "/dashboard/payment",
+        href: "/admin-dashboard/payment",
         icon: CreditCard,
+    },
+    {
+        title: "Add Gear",
+        href: "/admin-dashboard/add-gear",
+        icon: ClipboardPlus,
     },
     {
         title: "Gears",
         href: "/admin-dashboard/gears",
         icon: Backpack,
     },
+    {
+        title: "All Rental",
+        href: "/admin-dashboard/rentals",
+        icon: Handshake,
+    },
+    
     {
         title: "Users",
         href: "/admin-dashboard/allUsers",
@@ -59,19 +72,29 @@ const adminNavItems = [
 const providerNavItems = [
     {
         title: "Profile",
-        href: "/dashboard/profile",
+        href: "/provider-dashboard/profile",
         icon: User,
     },
     {
         title: "Payment",
-        href: "/dashboard/payment",
+        href: "/provider-dashboard/payment",
         icon: CreditCard,
+    },
+     {
+        title: "Add Gear",
+        href: "/provider-dashboard/add-gear",
+        icon: ClipboardPlus,
     },
     {
         title: "Gears",
-        href: "/dashboard/gears",
+        href: "/provider-dashboard/gears",
         icon: Backpack,
     },
+    {
+        title: "All Rental",
+        href: "/provider-dashboard/rentals",
+        icon: Handshake,
+    }
 
 ]
 

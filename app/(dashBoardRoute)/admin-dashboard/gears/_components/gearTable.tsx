@@ -17,7 +17,6 @@ import {
 import GearForm from "./gearForm";
 import { deleteGear } from "../_action/updateGear";
 import { useRouter } from "next/navigation";
-import { Toast } from "@base-ui/react";
 import { toast } from "sonner";
 
 export interface Gear {
