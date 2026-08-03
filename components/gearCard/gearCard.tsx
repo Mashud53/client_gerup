@@ -1,36 +1,48 @@
 
 "use client"
-import { Card, CardContent, CardHeader} from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 import Link from "next/link";
+import Image from "next/image";
 
 
 export interface GearCard {
-    id:string
+    id: string
     name: string
+    image?: string
     price: number
     category: string
     brand: string
     available: boolean
-    
+
 }
-interface GearCardProps{
+interface GearCardProps {
     gear: GearCard
 }
 
 const GearCard = ({ gear }: GearCardProps) => {
-   
+
     return (
-        
+
         <Link href={`/gears/${gear.id}`}>
             <Card className="overflow-hidden transition-all hover:shadow-lg">
-                {/* Image placeholder */}
-                <div className="h-48 bg-linear-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center relative">
-                    <div className="text-slate-400 dark:text-slate-600 text-sm font-medium">
-                        {gear.category}
-                    </div>
-
+                
+                <div className="h-48 relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+                    {gear.image ? (
+                        <Image
+                            src={gear.image}
+                            alt={gear.name}
+                            fill
+                            className="object-cover"
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-linear-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 flex items-center justify-center">
+                            <div className="text-slate-400 dark:text-slate-600 text-sm font-medium">
+                                {gear.category}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <CardHeader className="pb-3">

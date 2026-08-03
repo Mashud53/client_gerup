@@ -11,9 +11,10 @@ export async function createGearAction(
     formData: FormData
 ) {
     const accessToken = (await cookies()).get("accessToken")?.value;
-
+    console.log(formData, "form daata =====");
     const payload = {
         name: formData.get("name"),
+        image: formData.get("image"),
         description: formData.get("description"),
         price: Number(formData.get("price")),
         category: formData.get("category"),
@@ -21,6 +22,7 @@ export async function createGearAction(
         available: formData.get("available") === "on",
         stock: Number(formData.get("stock")),
     };
+    console.log(payload,"payload =============");
 
     const res = await fetch(
         `${process.env.BACKEND_API_URL}/api/gear`,

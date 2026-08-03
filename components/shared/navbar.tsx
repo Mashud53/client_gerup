@@ -57,28 +57,28 @@ export type NavbarProps = {
 
 export function Navbar({ user }: NavbarProps) {
   const router = useRouter()
-  
-   
+
+
 
   const { name, email, role } = user?.data ?? {};
   const handleUserAction = async (action: string) => {
     if (action === 'dashboard') {
-      if(role ==="USER"){
+      if (role === "USER") {
         router.push('/dashboard')
       }
-      else if(role ==="ADMIN"){
+      else if (role === "ADMIN") {
         router.push('/admin-dashboard')
       }
-      else if(role ==="PROVIDER"){
+      else if (role === "PROVIDER") {
         router.push('/provider-dashboard')
       }
-      
+
     } else if (action === 'logout') {
       await logout()
       toast.success("User Logged Out Successfull!")
       router.replace("/")
       router.refresh()
-      
+
     }
   }
 
@@ -112,64 +112,72 @@ export function Navbar({ user }: NavbarProps) {
 
         {/* User Dropdown */}
         {user?.data ? <>
-        <DropdownMenu>
-          <DropdownMenuTrigger className="flex items-center gap-2 h-10 px-3 rounded-md hover:bg-accent">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-2 h-10 px-3 rounded-md hover:bg-accent">
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+                <AvatarFallback>U</AvatarFallback>
+              </Avatar>
 
-            <span className="hidden sm:inline text-sm font-medium">User</span>
+              <span className="hidden sm:inline text-sm font-medium">User</span>
 
-            <ChevronDown className="h-4 w-4 opacity-50" />
-          </DropdownMenuTrigger>
-         
-          <DropdownMenuContent align="end" className="w-56">
-            <div className="px-2 py-1.5 text-sm">
-              <p className="font-medium">{name}</p>
-              <p className="text-xs text-muted-foreground">{email}</p>
-            </div>
-            <DropdownMenuSeparator />
+              <ChevronDown className="h-4 w-4 opacity-50" />
+            </DropdownMenuTrigger>
 
-            {/* Mobile Nav Links - Only visible on small screens */}
-            <div className="md:hidden">
-              {navItems.map((item) => (
-                <DropdownMenuItem
-                  key={item.href}
-                 
-                  className="cursor-pointer"
-                >
-                  {item.label}
-                </DropdownMenuItem>
-              ))}
+            <DropdownMenuContent align="end" className="w-56">
+              <div className="px-2 py-1.5 text-sm">
+                <p className="font-medium">{name}</p>
+                <p className="text-xs text-muted-foreground">{email}</p>
+              </div>
               <DropdownMenuSeparator />
-            </div>
 
-            {/* User Menu Items */}
-            {userMenuItems.map((item) => {
-              const Icon = item.icon
-              return (
-                <DropdownMenuItem
-                  key={item.action}
-                  onClick={() => handleUserAction(item.action)}
-                  className="cursor-pointer"
-                >
-                  <Icon className="mr-2 h-4 w-4" />
-                  <span>{item.label}</span>
-                </DropdownMenuItem>
-              )
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        
-        </>:<>
-        <Link             
-              href={"/login"}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-             Login
-            </Link>
-        
+              {/* Mobile Nav Links - Only visible on small screens */}
+              <div className="md:hidden">
+                {navItems.map((item) => (
+                  <DropdownMenuItem
+                    key={item.href}
+
+                    className="cursor-pointer"
+                  >
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+              </div>
+
+              {/* User Menu Items */}
+              {userMenuItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <DropdownMenuItem
+                    key={item.action}
+                    onClick={() => handleUserAction(item.action)}
+                    className="cursor-pointer"
+                  >
+                    <Icon className="mr-2 h-4 w-4" />
+                    <span>{item.label}</span>
+                  </DropdownMenuItem>
+                )
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+        </> : <>
+          <div className='flex gap-2'>
+            <Link
+            href={"/login"}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Login
+          </Link>
+          <Link
+            href={"/signUp"}
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Signup
+          </Link>
+          </div>
+
         </>}
       </div>
     </nav>

@@ -5,6 +5,7 @@ import GearCard from "@/components/gearCard/gearCard";
 export interface GearProps {
     id:string
     name: string
+    image?: string
     price: number
     category: string
     brand: string

@@ -29,8 +29,8 @@ const userNavItems = [
         icon: CreditCard,
     },
     {
-        title: "Rent",
-        href: "/dashboard/gears",
+        title: "My Rental",
+        href: "/dashboard/rental",
         icon: Backpack,
     },
 

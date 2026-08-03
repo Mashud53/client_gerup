@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 // import { jwtUtils } from "./utils/jwt";
 
-const AUTH_ROUTES = ["/login", "/register"]
-const PUBLIC_ROUTES = ["/", "/gears", "/login", "/register"]
+const AUTH_ROUTES = ["/login", "/signUp"]
+const PUBLIC_ROUTES = ["/", "/gears", "/login", "/signUp"]
 
 export async function proxy(request: NextRequest) {
 

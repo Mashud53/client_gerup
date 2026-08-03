@@ -9,7 +9,8 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { createGearAction } from "./_action/addGear";
+import { createGearAction } from "@/app/(dashBoardRoute)/admin-dashboard/add-gear/_action/addGear";
+// import { createGearAction } from "./_action/addGear";
 
 
 
@@ -18,7 +19,7 @@ const initialState = {
     message: "",
 };
 
-const AddGear = () => {
+const AddGearForm = () => {
    
     
     const [state, formAction, isPending] = useActionState(
@@ -127,4 +128,4 @@ const AddGear = () => {
     );
 };
 
-export default AddGear;
+export default AddGearForm;

@@ -100,12 +100,9 @@ export default function AllRental({
         }
     };
 
-    // const handleStatus = async (id: string) => {
-    //     const res = await changeStatus(id)
-
-    // }
+   
     const onStatusChange=async(id : string, status: RentalStatus)=>{
-        console.log(id, status);
+        
         const res = await changeStatus(id, status)
                 console.log(res,"rental status =====");
                 if(res.success){

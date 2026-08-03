@@ -33,8 +33,7 @@ export type RentalStatus =
 
 export const changeStatus = async (id: string, status: RentalStatus) => {
     const accessToken = (await cookies()).get("accessToken")?.value;
-    console.log(id,status,"paylod======");
-        
+            
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals/${id}`, {
         method: "PATCH",
         headers: {

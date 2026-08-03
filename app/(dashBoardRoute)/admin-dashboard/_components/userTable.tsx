@@ -76,6 +76,7 @@ const UserTable = ({
                         <TableHead className="w-62.5">Name</TableHead>
                         <TableHead>Email</TableHead>
                         <TableHead>Role</TableHead>
+                        <TableHead>Status</TableHead>
                         <TableHead className="text-center">Change Role</TableHead>
                         <TableHead className="text-center">Delete</TableHead>
                     </TableRow>

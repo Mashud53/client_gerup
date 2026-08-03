@@ -24,8 +24,6 @@ export default async function Page({
   const data = await res.json()
   const gear = data.data.result as GearItem
   
-  
-  console.log(gear);
 
   return <div>
     <GearDetailsPage gear={gear}/>

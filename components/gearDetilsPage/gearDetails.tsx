@@ -50,9 +50,7 @@ export default function GearDetailsPage({gear}:GearDetailsPageProps) {
                         <h1 className="text-3xl font-bold text-foreground">Gear Details</h1>
                         <p className="mt-1 text-muted-foreground">Premium rental equipment</p>
                     </div>
-                    <Button variant="outline" size="sm">
-                        ← Back
-                    </Button>
+                    
                 </div>
 
                 <div className="grid gap-8 lg:grid-cols-3">

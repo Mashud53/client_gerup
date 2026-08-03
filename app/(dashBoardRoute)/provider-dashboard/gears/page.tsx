@@ -1,5 +1,5 @@
-
-import GearTable from './_components/gearTable';
+import React from 'react';
+import GearTable from '../../admin-dashboard/gears/_components/gearTable';
 
 const AllGears = async () => {
      const response = await fetch(`${process.env.BACKEND_API_URL}/api/gear`);
