@@ -1,25 +1,52 @@
 "use server"
 import { cookies } from "next/headers";
 
-export const rentalDetails = async (gearId:string, userId:string) => {
+export const rentalDetails = async (gearId: string, userId: string) => {
     const accessToken = (await cookies()).get("accessToken")?.value;
- 
-    // const userDetails = await fetch(`${process.env.BACKEND_API_URL}/api/auth/${userId}`, {
-    //     headers: {
-    //         Authorization: `${accessToken}`
-    //     },
-        
-    // });
-    // const rentalUser = await userDetails.json()
-    // const {name:userName} = rentalUser.data;
 
-    const gearDetails = await fetch(`${process.env.BACKEND_API_URL}/api/gear/${gearId}`)
-    const rentalGear = await gearDetails.json()
-    // const {name, price, category, brand}= rentalGear.data
-    // console.log(rentalGear);
+    const [userRes, gearRes] = await Promise.all([
+        fetch(`${process.env.BACKEND_API_URL}/api/auth/user/${userId}`, {
+            headers: {
+                Authorization: `${accessToken}`,
+            },
+        }),
+        fetch(`${process.env.BACKEND_API_URL}/api/gear/${gearId}`),
+    ])
+    const [rentalUser, rentalGear] = await Promise.all([
+        userRes.json(),
+        gearRes.json(),
+    ]);
+
     
     return {
-        user: userId,
-        gear:rentalGear.data
+        user: rentalUser.data,
+        gear: rentalGear.data,
     }
+}
+
+export type RentalStatus =
+  | "PENDING"
+  | "APPROVED"
+  | "REJECTED"
+  | "RETURNED"
+  | "CANCELLED";
+
+export const changeStatus = async (id: string, status: RentalStatus) => {
+    const accessToken = (await cookies()).get("accessToken")?.value;
+    console.log(id,status,"paylod======");
+        
+    const res = await fetch(`${process.env.BACKEND_API_URL}/api/rentals/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `${accessToken}`
+        },
+        body: JSON.stringify(
+            {status},
+        )
+    }
+    )
+    const result = await res.json()
+    console.log(result,"staus result =======");
+    return result
 }

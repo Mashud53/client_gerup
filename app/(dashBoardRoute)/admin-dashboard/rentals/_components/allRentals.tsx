@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
     Table,
@@ -11,10 +11,19 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { rentalDetails } from "../_action/rentalDetails";
+import { changeStatus, rentalDetails } from "../_action/rentalDetails";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 export type RentalStatus =
@@ -50,57 +59,61 @@ interface RentalGear {
     updatedAt: string;
 }
 
+interface RentalUser {
+    id: string;
+    name: string;
+    email: string;
+    role: "USER" | "ADMIN" | "PROVIDER";
+    status: "ACTIVE" | "SUSPEND";
+    createdAt: string;
+    updatedAt: string;
+}
+
 export default function AllRental({
     rentals,
 
 }: AllRentalProps) {
+    const router = useRouter();
 
     const [loadingId, setLoadingId] = useState<string | null>(null);
 
     const [selectedRental, setSelectedRental] =
         useState<Rental | null>(null);
     const [selectedGear, setSelectedGear] = useState<RentalGear | null>(null)
+    const [selectedUser, setSelectedUser] = useState<RentalUser | null>(null)
 
     const handleClick = async (gear: Rental) => {
 
         try {
             setLoadingId(gear.id);
             const rental = await rentalDetails(gear.gearId, gear.userId)
-            console.log(rental);
+
             const gearDetails = rental.gear.result;
-
-
+            const rentalUser = rental.user
 
             setSelectedRental(gear);
             setSelectedGear(gearDetails)
-
+            setSelectedUser(rentalUser)
 
         } finally {
             setLoadingId(null);
         }
     };
-    // useEffect(() => {
-    //     console.log("selectedRental:", selectedRental);
-    // }, [selectedRental]);
-    //   const handleClick = async (id: string) => {
-    //     try {
-    //       setLoadingId(id);
 
-    //       const res = await fetch(`/api/rental/${id}`);
+    // const handleStatus = async (id: string) => {
+    //     const res = await changeStatus(id)
 
-    //       if (!res.ok) {
-    //         throw new Error("Failed to fetch rental.");
-    //       }
+    // }
+    const onStatusChange=async(id : string, status: RentalStatus)=>{
+        console.log(id, status);
+        const res = await changeStatus(id, status)
+                console.log(res,"rental status =====");
+                if(res.success){
+                    toast.success("Status Update successfull!")
+                    router.refresh()
+                }
 
-    //       const rental = await res.json();
-
-    //       onRentalSelect?.(rental);
-    //     } catch (error) {
-    //       console.error(error);
-    //     } finally {
-    //       setLoadingId(null);
-    //     }
-    //   };
+    }
 
     const getVariant = (status: RentalStatus) => {
         switch (status) {
@@ -159,7 +172,9 @@ export default function AllRental({
                                 </TableCell>
 
                                 <TableCell>
-                                    <Badge variant={getVariant(rental.status)}>
+                                    <Badge variant={getVariant(rental.status)}
+
+                                    >
                                         {loadingId === rental.id
                                             ? "Loading..."
                                             : rental.status}
@@ -177,6 +192,7 @@ export default function AllRental({
                     if (!open) {
                         setSelectedRental(null);
                         setSelectedGear(null);
+                        setSelectedUser(null);
                     }
                 }}
             >
@@ -201,12 +217,65 @@ export default function AllRental({
                                     {selectedRental?.totalAmount}
                                 </p>
 
-                                <p>
-                                    <span className="font-medium">Status:</span>{" "}
-                                    {selectedRental?.status}
-                                </p>
+                               
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <span className="font-medium">Status:</span>
+
+                                <Select
+                                    defaultValue={selectedRental.status}
+                                    onValueChange={(value) =>
+                                        onStatusChange?.(
+                                            selectedRental.id,
+                                            value as RentalStatus
+                                        )
+                                    }
+                                >
+                                    <SelectTrigger className="w-48">
+                                        <SelectValue />
+                                    </SelectTrigger>
+
+                                    <SelectContent>
+                                        <SelectItem value="PENDING">
+                                            PENDING
+                                        </SelectItem>
+
+                                        <SelectItem value="APPROVED">
+                                            APPROVED
+                                        </SelectItem>
+
+                                        <SelectItem value="REJECTED">
+                                            REJECTED
+                                        </SelectItem>
+
+                                        <SelectItem value="RETURNED">
+                                            RETURNED
+                                        </SelectItem>
+
+                                        <SelectItem value="CANCELLED">
+                                            CANCELLED
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
                             </div>
 
+
+                            {selectedUser && (
+                                <div className="space-y-2 rounded-lg border p-4">
+                                    <h3 className="font-semibold">User Information</h3>
+
+                                    <p>
+                                        <span className="font-medium">Name:</span>{" "}
+                                        {selectedUser?.name}
+                                    </p>
+
+
+                                    <p>
+                                        <span className="font-medium">Email:</span>{" "}
+                                        {selectedUser?.email}
+                                    </p>
+                                </div>
+                            )}
                             {/* Gear Information */}
                             {selectedGear && (
                                 <div className="space-y-2 rounded-lg border p-4">
