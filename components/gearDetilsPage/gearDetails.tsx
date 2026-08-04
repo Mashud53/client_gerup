@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ShoppingCart, Heart, Truck, Shield, Clock, Star } from 'lucide-react'
+import { rentPayment } from '@/app/(commonRoute)/-action/payment'
 
 interface GearItem {
     image?: string
@@ -24,7 +25,7 @@ interface GearDetailsPageProps{
 
 
 export default function GearDetailsPage({gear}:GearDetailsPageProps) {
-    const {image, name, description, price, category, brand, available, stock} = gear;
+    const {id,image, name, description, price, category, brand, available, stock} = gear;
     const [isRenting, setIsRenting] = useState(false)
     const [isFavorited, setIsFavorited] = useState(false)
     const [rentalDays, setRentalDays] = useState(1)
@@ -32,10 +33,11 @@ export default function GearDetailsPage({gear}:GearDetailsPageProps) {
     const handleRent = async () => {
         setIsRenting(true)
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
-            alert(
-                `Successfully rented ${name} for ${rentalDays} day(s)!\nTotal: $${(price * rentalDays).toFixed(2)}`
-            )
+            await rentPayment(id)
+            // await new Promise((resolve) => setTimeout(resolve, 1000))
+            // alert(
+            //     `Successfully rented ${name} for ${rentalDays} day(s)!\nTotal: $${(price * rentalDays).toFixed(2)}`
+            // )
         } finally {
             setIsRenting(false)
         }

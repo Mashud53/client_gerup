@@ -11,13 +11,15 @@ export async function proxy(request: NextRequest) {
 
     const cookieStore = request.cookies;
     const accessToken = cookieStore.get("accessToken")?.value
-    const refreshToken = cookieStore.get("refreshToken")?.value
+    // const refreshToken = cookieStore.get("refreshToken")?.value
 
-    const decodedToken = accessToken ? jwt.decode(accessToken) as JwtPayload : null;
+    // const decodedRefreshToken = refreshToken ? jwt.decode(refreshToken) as JwtPayload : null;
+    const decodedAccessToken = accessToken ? jwt.decode(accessToken) as JwtPayload : null;
     // const decodedToken = accessToken ? jwtUtils.verifiedToken(accessToken, process.env.JWT_ACCESS_SECRET as string) : null;
     // console.log(decodedToken, "decodec=============");
     let userRole = null;
-    if (!decodedToken) {
+    if (!decodedAccessToken) {
+       
         cookieStore.delete("accessToken");
         // return NextResponse.redirect(new URL('/login', request.url))
     }
@@ -27,8 +29,8 @@ export async function proxy(request: NextRequest) {
     //     return NextResponse.redirect(new URL('/login', request.url))
     // }
 
-    if (decodedToken) {
-        userRole = decodedToken.role
+    if (decodedAccessToken) {
+        userRole = decodedAccessToken.role
     }
 
     //    if(decodedToken?.success && decodedToken.data){

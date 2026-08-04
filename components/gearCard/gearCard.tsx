@@ -31,7 +31,7 @@ const GearCard = ({ gear }: GearCardProps) => {
                 <div className="h-48 relative overflow-hidden bg-slate-100 dark:bg-slate-800">
                     {gear.image ? (
                         <Image
-                            src={gear.image}
+                            src={gear?.image}
                             alt={gear.name}
                             fill
                             className="object-cover"
