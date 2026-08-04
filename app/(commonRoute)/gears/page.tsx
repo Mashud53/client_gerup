@@ -18,7 +18,7 @@ const GearsPage = async () => {
     const gears = data.data.result
     // console.log(gears);
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
             
             {
                 gears?.map((gear: GearProps) => (

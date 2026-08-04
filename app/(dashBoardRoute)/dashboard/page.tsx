@@ -1,6 +1,6 @@
-import React from 'react';
+"use server"
 
-const Dashboard = () => {
+const Dashboard =async () => {
     return (
         <div>
             user dashboard

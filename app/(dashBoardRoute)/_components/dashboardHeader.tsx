@@ -36,7 +36,7 @@ export function DashboardHeader({ user }: NavbarProps) {
         </div>
 
         <h1 className="text-lg font-semibold">
-          Dashboard
+         
         </h1>
       </div>
 

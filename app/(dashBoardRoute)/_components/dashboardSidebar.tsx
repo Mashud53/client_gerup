@@ -38,7 +38,7 @@ const userNavItems = [
 const adminNavItems = [
     {
         title: "Profile",
-        href: "/dashboard/profile",
+        href: "/admin-dashboard/profile",
         icon: User,
     },
     {

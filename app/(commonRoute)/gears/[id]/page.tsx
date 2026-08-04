@@ -26,7 +26,7 @@ export default async function Page({
   const gear = data.data.result as GearItem
   
 
-  return <div>
+  return <div className="container mx-auto">
     <GearDetailsPage gear={gear}/>
   </div>
 }
