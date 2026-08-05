@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import jwt from "jsonwebtoken"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,8 +19,8 @@ import { toast } from 'sonner'
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Gears', href: '/gears' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'About', href: '/about' },
+  
+  // { label: 'About', href: '/' },
 ]
 
 const userMenuItems = [
@@ -82,9 +82,7 @@ export function Navbar({ user }: NavbarProps) {
     }
   }
 
-  // const handleNavClick = (href: string) => {
-  //   router.push(href)
-  // }
+  
 
   return (
     <nav className="border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">

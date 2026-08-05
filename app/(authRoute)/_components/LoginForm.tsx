@@ -11,13 +11,16 @@ import { LogIn} from 'lucide-react'
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-
+const initialState = {
+  success: false,
+  message: "",
+};
 
 export default function LoginForm() {
     const router = useRouter()
     const [state, formAction, isPending] = useActionState(
         loginAction,
-        false
+        initialState
     );
    
     useEffect(()=>{

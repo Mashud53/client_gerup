@@ -3,16 +3,7 @@
 import { cookies } from "next/headers";
 import UserTable from "../_components/userTable";
 
-type Role = "USER" | "ADMIN" | "PROVIDER";
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: Role;
-  status: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 const Allusers = async () => {
   const cookieStore = await cookies()
 
@@ -28,6 +19,7 @@ const Allusers = async () => {
 
   return (
     <div>
+       <h1 className="mb-6 text-2xl font-bold">All Users</h1>
       <UserTable users ={users}/>
 
     </div>

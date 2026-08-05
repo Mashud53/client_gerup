@@ -12,11 +12,27 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from "@/components/ui/dialog";
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { updateStatus, updateUser } from "../../_action/updateUser";
 import { userDelete } from "../../_action/userDelete";
 import { StatusCell } from "./statusModel";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type Role = "USER" | "ADMIN" | "PROVIDER";
 
@@ -43,25 +59,29 @@ const UserTable = ({
 
 
 }: UserTableProps) => {
+    const [open, setOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState("");
+    const [selectedRole, setSelectedRole] = useState<Role>("USER");
     const router = useRouter()
 
-    const onRoleChange = (id: string) => {
-        updateUser(id)
+    const onRoleChange = (id: string, role: Role) => {
+        setSelectedUserId(id);
+        setSelectedRole(role);
+        setOpen(true);
+    };
 
+    
 
-    }
-
-   
     const onStatusChange = async (
         id: string,
         status: "ACTIVE" | "SUSPEND"
     ) => {
-       const result =await updateStatus(id, status)
-       console.log(result, "result ===========");
-       if(result.success){
-        toast.success("Status Update Successfully")
-        router.refresh()
-       }
+        const result = await updateStatus(id, status)
+        console.log(result, "result ===========");
+        if (result.success) {
+            toast.success("Status Update Successfully")
+            router.refresh()
+        }
 
         // updateUserStatus(id, status)
     };
@@ -117,7 +137,7 @@ const UserTable = ({
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    onClick={() => onRoleChange?.(user.id)}
+                                    onClick={() => onRoleChange(user.id, user.role as Role)}
                                 >
                                     <ShieldCheck className="mr-2 h-4 w-4" />
                                     Change
@@ -137,13 +157,56 @@ const UserTable = ({
                     ))}
                 </TableBody>
             </Table>
-        </div>
-    );
-    return (
-        <div>
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Change User Role</DialogTitle>
+                    </DialogHeader>
 
+                    <div className="space-y-2">
+                        <label className="text-sm font-medium">Role</label>
+
+                        <Select
+                            value={selectedRole}
+                            onValueChange={(value) => setSelectedRole(value as Role)}
+                        >
+                            <SelectTrigger>
+                                <SelectValue placeholder="Select role" />
+                            </SelectTrigger>
+
+                            <SelectContent>
+                                <SelectItem value="USER">USER</SelectItem>
+                                <SelectItem value="PROVIDER">PROVIDER</SelectItem>
+                                <SelectItem value="ADMIN">ADMIN</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+
+                    <DialogFooter>
+                        <Button variant="outline" onClick={() => setOpen(false)}>
+                            Cancel
+                        </Button>
+
+                        <Button
+                            onClick={async () => {
+                               const result= await updateUser(selectedUserId,selectedRole);
+                                console.log(result, "updae role ===");
+                                if(result.success){
+                                    toast.success("Role update Successfull!")
+                                    router.refresh()
+                                }
+                                setOpen(false);
+                            }}
+                        >
+                            Save Changes
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
+
     );
+
 };
 
 export default UserTable;

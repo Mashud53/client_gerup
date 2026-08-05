@@ -36,9 +36,9 @@ export function StatusCell({
     useState<Status>(status);
 
   const handleOpen = () => {
-  setSelectedStatus(status);
-  setOpen(true);
-};
+    setSelectedStatus(status);
+    setOpen(true);
+  };
 
   const handleSave = () => {
     onStatusChange?.(id, selectedStatus);
