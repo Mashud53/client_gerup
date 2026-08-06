@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 
 
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -25,9 +25,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
     >
-      <body>    
-        <Toaster position="top-right"/>    
-        <ThemeProvider>{children}</ThemeProvider>
+      <body>
+        <Toaster position="top-right" />
+        <ThemeProvider>
+          {children}
+
+        </ThemeProvider>
       </body>
     </html>
   )

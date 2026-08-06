@@ -1,4 +1,4 @@
-
+"use server"
 
 import GearCard from "@/components/gearCard/gearCard";
 

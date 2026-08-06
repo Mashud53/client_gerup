@@ -1,3 +1,5 @@
+"use server"
+
 import { Hero } from "@/components/ui/hero";
 
 
