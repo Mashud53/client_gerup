@@ -34,10 +34,7 @@ export default function GearDetailsPage({gear}:GearDetailsPageProps) {
         setIsRenting(true)
         try {
             await rentPayment(id)
-            // await new Promise((resolve) => setTimeout(resolve, 1000))
-            // alert(
-            //     `Successfully rented ${name} for ${rentalDays} day(s)!\nTotal: $${(price * rentalDays).toFixed(2)}`
-            // )
+           
         } finally {
             setIsRenting(false)
         }
