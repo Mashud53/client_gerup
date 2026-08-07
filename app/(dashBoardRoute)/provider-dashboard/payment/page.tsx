@@ -1,17 +1,15 @@
-"use server"
+
 
 import AllPayments from "@/components/shared/allPayments/allPayments";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const Payment = async() => {
+export default async function Payment () {
     const cookieStore = await cookies()
      const accessToken = cookieStore.get("accessToken")?.value;
     
         if (!accessToken) {
-            return {
-                success: false,
-                message: "user not logged in!"
-            }
+            redirect("/login")
         }
     
         const res = await fetch(`${process.env.BACKEND_API_URL}/api/payment/allpayments`, {
@@ -23,7 +21,7 @@ const Payment = async() => {
     
         const result =await res.json()
         const payments = result.data;
-        console.log(payments,"all Payments ======");
+        
     return (
         <div>
              <h1 className="mb-6 text-2xl font-bold">All Payments</h1>
@@ -32,4 +30,3 @@ const Payment = async() => {
     );
 };
 
-export default Payment;

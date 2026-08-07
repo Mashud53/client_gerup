@@ -1,6 +1,6 @@
-"use server"
 
-const Dashboard =async () => {
+
+export default async function Dashboard (){
     return (
         <div>
             user dashboard
@@ -8,4 +8,3 @@ const Dashboard =async () => {
     );
 };
 
-export default Dashboard;

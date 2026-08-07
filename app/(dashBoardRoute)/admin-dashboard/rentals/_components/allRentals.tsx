@@ -104,7 +104,7 @@ export default function AllRental({
     const onStatusChange=async(id : string, status: RentalStatus)=>{
         
         const res = await changeStatus(id, status)
-                console.log(res,"rental status =====");
+                
                 if(res.success){
                     toast.success("Status Update successfull!")
                     router.refresh()

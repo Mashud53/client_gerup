@@ -77,7 +77,7 @@ const UserTable = ({
         status: "ACTIVE" | "SUSPEND"
     ) => {
         const result = await updateStatus(id, status)
-        console.log(result, "result ===========");
+       
         if (result.success) {
             toast.success("Status Update Successfully")
             router.refresh()
@@ -190,7 +190,7 @@ const UserTable = ({
                         <Button
                             onClick={async () => {
                                const result= await updateUser(selectedUserId,selectedRole);
-                                console.log(result, "updae role ===");
+                                
                                 if(result.success){
                                     toast.success("Role update Successfull!")
                                     router.refresh()

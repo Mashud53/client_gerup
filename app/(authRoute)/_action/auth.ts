@@ -21,7 +21,7 @@ export async function loginAction(prevState: LoginState, formData: FormData) {
 
     const email = formData.get("email");
     const password = formData.get("password")
-    // console.log(email, password);
+   
 
     if (!email || !password) {
         throw new Error("email and password required")
@@ -61,13 +61,13 @@ export async function loginAction(prevState: LoginState, formData: FormData) {
         const decodedToken = jwt.decode(result.data.accessToken) as JwtPayload
 
         if(decodedToken.role ==="USER"){
-            redirect("/dashboard")
+            redirect("/dashboard/profile")
         }else if(decodedToken.role ==="ADMIN"){
-            redirect("/admin-dashboard")
+            redirect("/admin-dashboard/profile")
         }else if(decodedToken.role ==="PROVIDER"){
-            redirect("/provider-dashboard")
+            redirect("/provider-dashboard/profile")
         }
-        // console.log(decodedToken, "decodet token ============");
+        
     }
 
     return result

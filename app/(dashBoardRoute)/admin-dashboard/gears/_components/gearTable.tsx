@@ -39,7 +39,7 @@ const GearTable = ({ gears }: Props) => {
     const router = useRouter() 
     const handleDelete = async (id: string) => {
         const result = await deleteGear(id)
-        console.log(result,"Result =================");
+       
         if(result.success){
             toast.success("Gear delete successfull!")
             router.refresh()

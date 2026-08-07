@@ -139,11 +139,7 @@ const AllPayments = ({ payments }: PaymentTableProps) => {
       </div>
     </>
   );
-    return (
-        <div>
-            
-        </div>
-    );
+   
 };
 
 export default AllPayments;

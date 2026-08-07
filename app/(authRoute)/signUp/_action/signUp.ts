@@ -12,7 +12,7 @@ export async function signupAction(
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  console.log(formData);
+  
 
   if (!name || !email || !password) {
     return {
@@ -43,8 +43,7 @@ export async function signupAction(
     };
   }
 
-  console.log(data,"signup data =============");
-  
+ 
 
  
   return {

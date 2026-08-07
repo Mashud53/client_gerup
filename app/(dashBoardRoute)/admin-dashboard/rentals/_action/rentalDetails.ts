@@ -46,6 +46,6 @@ export const changeStatus = async (id: string, status: RentalStatus) => {
     }
     )
     const result = await res.json()
-    console.log(result,"staus result =======");
+    
     return result
 }

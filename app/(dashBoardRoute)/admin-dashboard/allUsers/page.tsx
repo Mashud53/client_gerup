@@ -15,7 +15,7 @@ const Allusers = async () => {
   })
   const result = await res.json()
   const users = result.data;
-  // console.log(result.data);
+  // (result.data);
 
   return (
     <div>

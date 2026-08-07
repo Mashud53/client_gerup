@@ -1,19 +1,17 @@
-"use server"
+
 
 
 import MyPaymentTable from "@/components/shared/payment/myPaymentTable";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const MyPayment = async () => {
+export default async function MyPayment (){
     const cookieStore = await cookies()
     const accessToken = cookieStore.get("accessToken")?.value;
 
     if (!accessToken) {
-        return {
-            success: false,
-            message: "user not logged in!"
-        }
+        redirect("/login")
     }
 
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/payment`, {
@@ -36,4 +34,3 @@ const MyPayment = async () => {
     );
 };
 
-export default MyPayment;

@@ -11,7 +11,7 @@ type Role = "ADMIN" | "PROVIDER" | "USER";
 // }
 
 export async function updateUser(id: string, role: Role) {
-    
+
     const cookieStore = await cookies()
 
     const accessToken = cookieStore.get("accessToken")?.value;
@@ -36,7 +36,6 @@ export const updateStatus = async (id: string, status: Status) => {
     const cookieStore = await cookies()
 
     const accessToken = cookieStore.get("accessToken")?.value;
-    console.log(id, status);
     const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/user/${id}`, {
         method: "PUT",
         headers: {

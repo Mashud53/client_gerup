@@ -1,19 +1,15 @@
-"use server"
-
 
 import MyProfile from "@/components/shared/profile/myProfile";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const Profile = async() => {
+export default async function Profile () {
     const cookieStore = await cookies()
     
         const accessToken = cookieStore.get("accessToken")?.value;
     
         if (!accessToken) {
-            return {
-                success: false,
-                message: "user not logged in!"
-            }
+            redirect("/login")
         }
     
         const res = await fetch(`${process.env.BACKEND_API_URL}/api/auth/me`, {
@@ -29,7 +25,7 @@ const Profile = async() => {
     
         const result =await res.json()
         const profileData = result.data;
-        console.log(result);
+      
     return (
         <div>
             <MyProfile profileData={profileData}/>
@@ -38,4 +34,3 @@ const Profile = async() => {
     );
 };
 
-export default Profile;

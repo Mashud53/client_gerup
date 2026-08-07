@@ -109,7 +109,7 @@ export function DashboardSidebar({
 }: DashboardSidebarProps) {
     const pathname = usePathname();
     const router = useRouter();
-    console.log(role, "role=========");
+    
     const handleLogout = async () => {
         await logout();
         router.replace("/");

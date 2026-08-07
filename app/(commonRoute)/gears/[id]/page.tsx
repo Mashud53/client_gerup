@@ -1,18 +1,7 @@
-"use server"
+
+
 import GearDetailsPage from "@/components/gearDetilsPage/gearDetails"
 
-
-interface GearItem {
-    image?: string
-    id: string
-    name: string
-    description: string
-    price: number
-    category: string
-    brand: string
-    available: boolean
-    stock: number
-}
 
 export default async function Page({
   params,

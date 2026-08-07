@@ -64,7 +64,7 @@ const GearForm = ({
 
     const handleSubmit = async() => {
        const result= await updateGear(form)
-       console.log(result,"update gear ======");
+       
         if(result.success){
             toast.success("Gear Updated Successfull!")
             router.refresh()

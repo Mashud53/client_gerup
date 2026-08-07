@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+
 "use server";
 
 import { cookies } from "next/headers";
@@ -11,7 +12,7 @@ export async function createGearAction(
     formData: FormData
 ) {
     const accessToken = (await cookies()).get("accessToken")?.value;
-    console.log(formData, "form daata =====");
+    
     const payload = {
         name: formData.get("name"),
         image: formData.get("image"),
@@ -22,7 +23,7 @@ export async function createGearAction(
         available: formData.get("available") === "on",
         stock: Number(formData.get("stock")),
     };
-    console.log(payload,"payload =============");
+    
 
     const res = await fetch(
         `${process.env.BACKEND_API_URL}/api/gear`,

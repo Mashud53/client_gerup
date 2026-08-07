@@ -34,6 +34,7 @@ const GearCard = ({ gear }: GearCardProps) => {
                             src={gear?.image}
                             alt={gear.name}
                             fill
+                            
                             className="object-cover"
                         />
                     ) : (

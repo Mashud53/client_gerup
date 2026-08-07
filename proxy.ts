@@ -20,9 +20,7 @@ export async function proxy(request: NextRequest) {
     let accessToken = cookieStore.get("accessToken")?.value
     let decodedAccessToken = accessToken ? jwtUtils.verifiedToken(accessToken, process.env.JWT_ACCESS_SECRET as string) : null;
 
-   
-    console.log(decodedRefreshToken, "========decoded refresh=====");
-  
+       
 
     if (!decodedAccessToken?.success && decodedRefreshToken?.success) {
         const result = await getNewAccessToken()
@@ -81,7 +79,7 @@ export async function proxy(request: NextRequest) {
     if (pathName.startsWith("/dashboard") && userRole !== "USER") {
         return NextResponse.redirect(new URL('/not-found', request.url))
     } else if (pathName.startsWith("/admin-dashboard") && userRole !== "ADMIN") {
-        console.log(userRole, "user========");
+        
         return NextResponse.redirect(new URL('/not-found', request.url))
     } else if (pathName.startsWith("/provider-dashboard") && userRole !== "PROVIDER") {
         return NextResponse.redirect(new URL('/not-found', request.url))

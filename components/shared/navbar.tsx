@@ -64,13 +64,13 @@ export function Navbar({ user }: NavbarProps) {
   const handleUserAction = async (action: string) => {
     if (action === 'dashboard') {
       if (role === "USER") {
-        router.push('/dashboard')
+        router.push('/dashboard/profile')
       }
       else if (role === "ADMIN") {
-        router.push('/admin-dashboard')
+        router.push('/admin-dashboard/profile')
       }
       else if (role === "PROVIDER") {
-        router.push('/provider-dashboard')
+        router.push('/provider-dashboard/profile')
       }
 
     } else if (action === 'logout') {
